@@ -12,14 +12,22 @@ public class UserDaoService {
 	
 	private static List<User> users = new ArrayList<>();
 	
+	private static int usersCount = 0;
+	
 	static {
-		users.add(new User(1, "Ismael", LocalDate.now().minusYears(30)));
-		users.add(new User(2, "Seck", LocalDate.now().minusYears(25)));
-		users.add(new User(3, "Ibaka", LocalDate.now().minusYears(20)));
+		users.add(new User(++usersCount, "Ismael", LocalDate.now().minusYears(30)));
+		users.add(new User(++usersCount, "Seck", LocalDate.now().minusYears(25)));
+		users.add(new User(++usersCount, "Ibaka", LocalDate.now().minusYears(20)));
 	}
 	
 	public List<User> findAll() {
 		return users;
+	}
+	
+	public User save(User user) {
+		user.setId(++usersCount);
+		users.add(user);
+		return user;
 	}
 	
 	public User findOne(int id) {
